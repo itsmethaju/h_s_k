@@ -706,7 +706,7 @@ https://templatemo.com/tm-569-edu-meeting
         <div class="col-lg-9 align-self-center">
           <div class="row">
             <div class="col-lg-12">
-              <form id="contact" action="" method="post">
+                <form id="contact" action="" method="post">
                 <div class="row">
                   <div class="col-lg-12">
                     <h2>Let's get in touch</h2>
@@ -786,6 +786,75 @@ https://templatemo.com/tm-569-edu-meeting
   <script src="assets/js/video.js"></script>
   <script src="assets/js/slick-slider.js"></script>
   <script src="assets/js/custom.js"></script>
+<!-- Load EmailJS SDK -->
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<!-- Your custom script for handling form submission -->
+<!-- Add this CSS within your <head> tag or an external stylesheet -->
+  <style>
+.alert {
+  position: fixed;
+  top: 50%; /* Position at the center vertically */
+  left: 50%; /* Position at the center horizontally */
+  transform: translate(-50%, -50%); /* Adjust the position to be exactly centered */
+  padding: 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  opacity: 0.9;
+  z-index: 1000;
+  background-color: green; /* Example color, you can adjust */
+}
+    .alert.success {
+      background-color: #4CAF50; /* Green for success */
+    }
+    .alert.error {
+      background-color: #f44336; /* Red for error */
+    }
+  </style>
+  
+  <!-- Your JavaScript code remains unchanged -->
+  <script>
+    emailjs.init("3ZldSuQ_W-mMjcvMm"); // Initialize EmailJS with your Public Key
+  
+    document.getElementById("contact").addEventListener("submit", function(event) {
+      event.preventDefault();
+  
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const subject = document.getElementById("subject").value;
+      const message = document.getElementById("message").value;
+  
+      emailjs.send("service_g28z6a3", "template_wb3qg7n", {
+        from_name: name,
+        from_email: email,
+        subject: subject,
+        message: message
+      })
+      .then(function(response) {
+        showAlert("Message sent successfully!", "success");
+        // document.getElementById("contact").reset();
+      })
+      .catch(function(error) {
+        showAlert("Failed to send message. Please try again.", "error");
+        console.error("EmailJS Error:", error);
+      });
+    });
+  
+    function showAlert(message, type) {
+      const alertBox = document.createElement("div");
+      alertBox.className = `alert ${type}`;
+      alertBox.innerText = message;
+      document.body.appendChild(alertBox);
+  
+      setTimeout(() => {
+        alertBox.remove();
+      }, 3000);
+    }
+  </script>
+  
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');
@@ -833,28 +902,7 @@ https://templatemo.com/tm-569-edu-meeting
       checkSection();
     });
 
-
-  // Set the threshold time in milliseconds (e.g., 3000 ms = 3 seconds)
-  const thresholdTime = 3000;
-
-  // Start a timer
-  const startTime = new Date().getTime();
-
-  // Simulating a function that checks response time (this could be an API call)
-  function checkResponse() {
-    const endTime = new Date().getTime();
-    const responseTime = endTime - startTime;
-
-    if (responseTime > thresholdTime) {
-      // Hide the image if response time exceeds the threshold
-      document.getElementById('logo1').style.display = 'none';
-    }
-  }
-
-  // Simulate the function call after some delay (adjust as needed for testing)
-  setTimeout(checkResponse, 2000); // Adjust 2000 ms as needed for testing
-
-
+   
   </script>
 </body>
 

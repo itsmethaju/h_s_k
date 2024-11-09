@@ -48,6 +48,30 @@ figure, header, nav, section, article, aside, footer, figcaption {
     display: none;
   }
 }
+/* Basic styles for the alert box */
+.alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+  opacity: 0.9;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+/* Success alert style */
+.alert.success {
+  background-color: #4caf50; /* Green */
+}
+
+/* Error alert style */
+.alert.error {
+  background-color: #f44336; /* Red */
+}
+
 
 .clearfix:after {
   content: ".";
